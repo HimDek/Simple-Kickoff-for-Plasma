@@ -30,9 +30,9 @@ The search bar uses `Plasma Search`, which is the same search provider used in t
 <h1 align="center">Get it on</h1>
 
 <p align="center">
-  <a href="https://store.kde.org/p/1819888">KDE Store</a>
-  |
   <a href="https://www.pling.com/p/1819888">The Pling Store</a>
+  |
+  <a href="https://store.kde.org/p/1819888">KDE Store</a>
   |
   <a href="https://www.opendesktop.org/p/1819888">Opendesktop.org</a>
 </p>
