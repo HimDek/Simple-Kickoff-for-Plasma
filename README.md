@@ -3,16 +3,24 @@
  <p align="center">A simplified fork of KDE Plasma's default Kickoff Application Launcher</p>
 </p>
 
+<p align="center">
+ <a href="https://github.com/HimDek/Simple-Kickoff-for-Plasma/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/HimDek/Simple-Kickoff-for-Plasma?style=flat-square"></a>
+ <a href="https://github.com/HimDek/Simple-Kickoff-for-Plasma/pulls"><img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/himdek/Simple-Kickoff-for-Plasma?style=flat-square"></a>
+ <a href="https://github.com/HimDek/Simple-Kickoff-for-Plasma/blob/master/LICENSE.md"><img alt="GitHub license" src="https://img.shields.io/github/license/HimDek/Simple-Kickoff-for-Plasma?style=flat-square"></a>
+ <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/himdek/Simple-Kickoff-for-Plasma?style=flat-square">
+ <a href="https://github.com/HimDek/Simple-Kickoff-for-Plasma/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/HimDek/Simple-Kickoff-for-Plasma?style=flat-square"></a>
+ <a href="https://github.com/HimDek/Simple-Kickoff-for-Plasma/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/HimDek/Simple-Kickoff-for-Plasma?style=flat-square"></a>
+</p>
 
-  <p align="center">
-    <a href="#gallery">View Screenshots</a>
-    |
-    <a href="#powerful-plasma-search">Powerful Plasma Search</a>
-    |
-    <a href="#prerequisites">Install</a>
-    |
-    <a href="#changes-made-over-default-kickoff">Differences from Kickoff</a>
-  </p>
+<p align="center">
+  <a href="#gallery">View Screenshots</a>
+  |
+  <a href="#powerful-plasma-search">Powerful Plasma Search</a>
+  |
+  <a href="#prerequisites">Install</a>
+  |
+  <a href="#changes-made-over-default-kickoff">Differences from Kickoff</a>
+</p>
 
 This is a simplified fork of Kickoff which is KDE Plasma Desktop's default Application launcher. The design is minimalized without compromising on power and important features.
 
@@ -30,11 +38,9 @@ The search bar uses `Plasma Search`, which is the same search provider used in t
 <h1 align="center">Get it on</h1>
 
 <p align="center">
-  <a href="https://www.pling.com/p/1819888">The Pling Store</a>
-  |
-  <a href="https://store.kde.org/p/1819888">KDE Store</a>
-  |
-  <a href="https://www.opendesktop.org/p/1819888">Opendesktop.org</a>
+  <a href="https://www.pling.com/p/1819888"><img src="https://img.shields.io/badge/Pling%20Store-informational?style=for-the-badge&color=orange" /></a>
+  <a href="https://store.kde.org/p/1819888"><img src="https://img.shields.io/badge/KDE%20Store-informational?style=for-the-badge&logo=KDE" /></a>
+  <a href="https://www.opendesktop.org/p/1819888"><img src="https://img.shields.io/badge/openDesktop.org-informational?style=for-the-badge&color=blueviolet" /></a>
 </p>
 
 <p align="center">Install it directly from any of the above mentioned sources</p>
