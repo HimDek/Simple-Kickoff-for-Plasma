@@ -1,4 +1,18 @@
-# Simple Kickoff
+<p align="center">
+ <h1 align="center">Simple Kickoff</h1>
+ <p align="center">A simplified fork of KDE Plasma's default Kickoff Application Launcher</p>
+</p>
+
+
+  <p align="center">
+    <a href="#gallery">View Screenshots</a>
+    |
+    <a href="#powerful-plasma-search">Powerful Plasma Search</a>
+    |
+    <a href="#prerequisites">Install</a>
+    |
+    <a href="#changes-made-over-default-kickoff">Differences from Kickoff</a>
+  </p>
 
 This is a simplified fork of Kickoff which is KDE Plasma Desktop's default Application launcher. The design is minimalized without compromising on power and important features.
 
@@ -40,14 +54,13 @@ The search bar uses `Plasma Search`, which is the same search provider used in t
 
 ## Gallery:
 
-![](assets/20220620_195604_Nordic_Round_List.png)
-
-![](assets/20220620_195604_Nordic_Round_Grid.png)
-
-![](assets/20220620_195930_Sweet_List.png)
-
-![](assets/20220620_195930_Sweet_Grid.png)
-
-![](assets/20220620_200013_Breeze_List.png)
-
-![](assets/20220620_200013_Breeze_Grid.png)
+<p align="center">
+<img width="400px" src="assets/20220620_195604_Nordic_Round_List.png" align="center"/>
+<img width="400px" src="assets/20220620_195604_Nordic_Round_Grid.png" align="center"/>
+<br /><br />
+<img width="400px" src="assets/20220620_195930_Sweet_List.png" align="center"/>
+<img width="400px" src="assets/20220620_195930_Sweet_Grid.png" align="center"/>
+<br /><br />
+<img width="400px" src="assets/20220620_200013_Breeze_List.png" align="center"/>
+<img width="400px" src="assets/20220620_200013_Breeze_Grid.png" align="center"/>
+</p>
