@@ -7,7 +7,7 @@
  <a href="https://github.com/HimDek/Simple-Kickoff-for-Plasma/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/HimDek/Simple-Kickoff-for-Plasma?style=flat-square"></a>
  <a href="https://github.com/HimDek/Simple-Kickoff-for-Plasma/pulls"><img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/himdek/Simple-Kickoff-for-Plasma?style=flat-square"></a>
  <a href="https://github.com/HimDek/Simple-Kickoff-for-Plasma/"><img src="https://img.shields.io/badge/GitHub-View%20sourcecode-blue?style=flat-square&logo=github&color=blueviolet" /></a>
- <a href="https://himde.com/Simple-Kickoff-for-Plasma/"><img src="https://img.shields.io/badge/himdek.com-View%20Website-blue?style=flat-square&logo=Internet-Explorer&color=blue" /></a>
+ <a href="https://himdek.com/Simple-Kickoff-for-Plasma/"><img class="invisible" src="https://img.shields.io/badge/himdek.com-View%20in%20Website-blue?style=flat-square&logo=Internet-Explorer&color=blue" /></a>
  <a href="https://github.com/HimDek/Simple-Kickoff-for-Plasma/blob/master/LICENSE.md"><img alt="GitHub license" src="https://img.shields.io/github/license/HimDek/Simple-Kickoff-for-Plasma?style=flat-square"></a>
  <a href="https://github.com/HimDek/Simple-Kickoff-for-Plasma/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/HimDek/Simple-Kickoff-for-Plasma?style=flat-square"></a>
  <a href="https://github.com/HimDek/Simple-Kickoff-for-Plasma/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/HimDek/Simple-Kickoff-for-Plasma?style=flat-square"></a>
