@@ -26,25 +26,26 @@ The search bar uses `Plasma Search`, which is the same search provider used in t
 
 * [KDE Plasma Desktop Environment](https://kde.org/plasma-desktop/)
 
-## Installation
 
-**Get it on:**
+<h1 align="center">Get it on</h1>
 
-[KDE store](https://store.kde.org/p/1819888)
+<p align="center">
+  <a href="https://store.kde.org/p/1819888">KDE Store</a>
+  |
+  <a href="https://www.pling.com/p/1819888">The Pling Store</a>
+  |
+  <a href="https://www.opendesktop.org/p/1819888">Opendesktop.org</a>
+</p>
 
-[Pling](https://www.pling.com/p/1819888)
+<p align="center">Install it directly from any of the above mentioned sources</p>
 
-[Opendesktop](https://www.opendesktop.org/p/1819888)
+<p align="center">or</p>
 
-* Install it directly from any of the above mentioned sources.
+<p align="center">If you download the file, extract it, open a terminal in the directory containing the `metadata.desktop` file and execute the following command:</p>
 
-  or
-
-  If you download the file however, extract it, open a terminal in the directory containing the `metadata.desktop` file and execute the following command:
-
-  ```
-  kpackagetool5 -t Plasma/Applet --install
-  ```
+<p align="center">
+  <pre>kpackagetool5 -t Plasma/Applet --install</pre>
+</p>
 
 ## Changes made over default Kickoff:
 
@@ -52,7 +53,7 @@ The search bar uses `Plasma Search`, which is the same search provider used in t
 * Removed the Configure button (This feature can still be accessed by right clicking the widget icon and `Configure Simple Application Launcher..`)
 * Unified design: Removed the header and footer, and every component now shares the same background
 
-## Gallery:
+<h1 align="center">Gallery</h1>
 
 <p align="center">
 <img width="400px" src="assets/20220620_195604_Nordic_Round_List.png" align="center"/>
