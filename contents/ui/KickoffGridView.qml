@@ -2,6 +2,7 @@
     SPDX-FileCopyrightText: 2015 Eike Hein <hein@kde.org>
     SPDX-FileCopyrightText: 2021 Mikel Johnson <mikel5764@gmail.com>
     SPDX-FileCopyrightText: 2021 Noah Davis <noahadvs@gmail.com>
+    SPDX-FileCopyrightText: 2022 Himprakash Deka <himprakashd@gmail.com>
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */

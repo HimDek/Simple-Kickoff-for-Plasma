@@ -5,6 +5,7 @@
     Copyright (C) 2015-2018  Eike Hein <hein@kde.org>
     Copyright (C) 2021 by Mikel Johnson <mikel5764@gmail.com>
     Copyright (C) 2021 by Noah Davis <noahadvs@gmail.com>
+    Copyright (C) 2022 Himprakash Deka <himprakashd@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
