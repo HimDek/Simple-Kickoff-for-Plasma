@@ -121,7 +121,7 @@
         "ServiceTypes": [
             "Plasma/Applet"
         ],
-        "Version": "2.2",
+        "Version": "2.3",
         "Website": "https://www.github.com/hide-techno-tips/simple-kickoff-for-plasma"
     },
     "X-Plasma-API": "declarativeappletscript",
