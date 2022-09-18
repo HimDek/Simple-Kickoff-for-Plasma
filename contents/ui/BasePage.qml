@@ -42,7 +42,7 @@ FocusScope {
     property alias implicitSideBarHeight: sideBarLoader.implicitHeight
 
     implicitWidth: root.preferredSideBarWidth + contentAreaLoader.implicitWidth
-    implicitHeight: root.preferredSideBarHeight
+    implicitHeight: Math.max(root.preferredSideBarHeight, KickoffSingleton.gridCellSize * plasmoid.configuration.gridRows)
 
     Kicker.TriangleMouseFilter {
         id: sideBarFilter

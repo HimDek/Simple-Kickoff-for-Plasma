@@ -110,10 +110,10 @@ Item {
     //BEGIN Metrics
     readonly property PlasmaCore.FrameSvgItem backgroundMetrics: PlasmaCore.FrameSvgItem {
         // Inset defaults to a negative value when not set by margin hints
-        readonly property real leftPadding: margins.left - Math.max(inset.left, 0)
-        readonly property real rightPadding: margins.right - Math.max(inset.right, 0)
-        readonly property real topPadding: margins.top - Math.max(inset.top, 0)
-        readonly property real bottomPadding: margins.bottom - Math.max(inset.bottom, 0)
+        readonly property real leftPadding: margins.left - inset.left
+        readonly property real rightPadding: margins.right - inset.right
+        readonly property real topPadding: margins.top - inset.top
+        readonly property real bottomPadding: margins.bottom - inset.bottom
         readonly property real spacing: leftPadding
         visible: false
         imagePath: plasmoid.formFactor === PlasmaCore.Types.Planar ? "widgets/background" : "dialogs/background"

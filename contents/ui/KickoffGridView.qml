@@ -76,7 +76,7 @@ EmptyPage {
 
         Accessible.description: i18n("Grid with %1 rows, %2 columns", rows, columns) // can't use i18np here
 
-        implicitWidth: verticalScrollBar.visible ? (view.cellWidth * 4  + verticalScrollBar.width) : view.cellWidth * 4
+        implicitWidth: verticalScrollBar.visible ? (view.cellWidth * plasmoid.configuration.gridColumns + verticalScrollBar.width) : view.cellWidth * plasmoid.configuration.gridColumns
         implicitHeight: preferredHeight
 
         cellHeight: KickoffSingleton.gridCellSize

@@ -17,8 +17,16 @@
             <label>List of system action favorites.</label>
             <default>suspend,hibernate,reboot,shutdown</default>
         </entry>
+        <entry name="gridColumns" type="Int">
+            <label>Number of cloumns in the grid</label>
+            <default>4</default>
+        </entry>
+        <entry name="gridRows" type="Int">
+            <label>Number of rows in the grid</label>
+            <default>4</default>
+        </entry>
         <entry name="primaryActions" type="Int">
-            <label>Which actions should be displayed in the footer: 0 = Power, 1 = Session, 2 = Custom, 3 = Power and session</label>
+            <label>Which actions should be displayed in the header: 0 = Power, 1 = Session, 2 = Custom, 3 = Power and session</label>
             <default>0</default>
         </entry>
         <entry name="favoritesPortedToKAstats" type="Bool">
@@ -39,7 +47,7 @@
         </entry>
         <entry name="alphaSort" type="Bool">
             <label>Whether to sort menu contents alphabetically or use manual/system sort order.</label>
-            <default>false</default>
+            <default>true</default>
         </entry>
         <entry name="pin" type="Bool">
             <label>Whether the popup should remain open when another window is activated</label>

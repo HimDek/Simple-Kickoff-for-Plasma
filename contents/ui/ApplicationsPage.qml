@@ -45,7 +45,7 @@ BasePage {
                 mainContentView: true
                 focus: true
                 model: plasmoid.rootItem.rootModel.favoritesModel
-                preferredHeight: sideBar.implicitHeight
+                preferredHeight: root.implicitHeight
             }
         }
 
@@ -56,7 +56,7 @@ BasePage {
                 objectName: "favoritesGridView"
                 focus: true
                 model: plasmoid.rootItem.rootModel.favoritesModel
-                preferredHeight: sideBar.implicitHeight
+                preferredHeight: root.implicitHeight
             }
         }
 
@@ -69,7 +69,7 @@ BasePage {
                 model: stackView.appsModel
                 section.property: model && model.description == "KICKER_ALL_MODEL" ? "display" : ""
                 section.criteria: ViewSection.FirstCharacter
-                preferredHeight: sideBar.implicitHeight
+                preferredHeight: root.implicitHeight
             }
         }
 
@@ -79,7 +79,7 @@ BasePage {
                 id: applicationsGridView
                 objectName: "applicationsGridView"
                 model: stackView.appsModel
-                preferredHeight: sideBar.implicitHeight
+                preferredHeight: root.implicitHeight
             }
         }
 

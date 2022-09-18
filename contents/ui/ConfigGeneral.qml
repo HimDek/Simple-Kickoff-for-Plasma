@@ -9,7 +9,6 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.5
-
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
 import org.kde.kirigami 2.5 as Kirigami
@@ -22,6 +21,8 @@ ColumnLayout {
     property alias cfg_alphaSort: alphaSort.checked
     property var cfg_systemFavorites: String(plasmoid.configuration.systemFavorites)
     property int cfg_primaryActions: plasmoid.configuration.primaryActions
+    property alias cfg_gridColumns: gridColumns.value
+    property alias cfg_gridRows: gridRows.value
 
     Kirigami.FormLayout {
         Button {
@@ -87,6 +88,42 @@ ColumnLayout {
             icon.name: "settings-configure"
             text: i18n("Configure enabled search plugins")
             onClicked: KQuickAddons.KCMShell.openSystemSettings("kcm_plasmasearch")
+        }
+
+        Item {
+            Kirigami.FormData.isSection: true
+        }
+
+        SpinBox {
+            id: gridColumns
+            Layout.minimumWidth: Kirigami.Units.gridUnit * 1
+            Kirigami.FormData.label: i18n("Colums in grid:")
+            from: 4
+            to: 8
+            stepSize: 1
+            editable: false
+            textFromValue: function(value) {
+                return value;
+            }
+            valueFromText: function(text) {
+                return parseInt(text);
+            }
+        }
+
+        SpinBox {
+            id: gridRows
+            Layout.minimumWidth: Kirigami.Units.gridUnit * 1
+            Kirigami.FormData.label: i18n("Minimum rows in grid:")
+            from: 4
+            to: 8
+            stepSize: 1
+            editable: false
+            textFromValue: function(value) {
+                return value;
+            }
+            valueFromText: function(text) {
+                return parseInt(text);
+            }
         }
 
         Item {

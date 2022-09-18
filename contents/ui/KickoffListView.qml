@@ -58,7 +58,7 @@ EmptyPage {
 
         Accessible.role: Accessible.List
 
-        implicitWidth: mainContentView ? KickoffSingleton.gridCellSize * 4 : (preferredWidth ? preferredWidth : contentWidth)
+        implicitWidth: mainContentView ? KickoffSingleton.gridCellSize * plasmoid.configuration.gridColumns : (preferredWidth ? preferredWidth : contentWidth)
         implicitHeight: mainContentView ? preferredHeight : contentHeight
 
         currentIndex: count > 0 ? 0 : -1
