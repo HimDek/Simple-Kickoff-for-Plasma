@@ -47,6 +47,7 @@ T.ItemDelegate {
     property var actionList: null
     property bool isSearchResult: false
     readonly property bool menuClosed: ActionMenu.menu.status == 3 // corresponds to DialogStatus.Closed
+    property bool isSideBar: false
 
     property bool dragEnabled: enabled && !root.isCategory
         && plasmoid.immutability !== PlasmaCore.Types.SystemImmutable
@@ -214,7 +215,9 @@ T.ItemDelegate {
             }
             // No need to check currentIndex first because it's
             // built into QQuickListView::setCurrentIndex() already
-            root.view.currentIndex = index
+            if(!root.isSideBar || plasmoid.configuration.hoverActivate) {
+                root.view.currentIndex = index
+            }
         }
         onPressed: {
             // Select and focus on press to improve responsiveness and touch feedback
@@ -230,6 +233,9 @@ T.ItemDelegate {
             }
         }
         onClicked: if (mouse.button === Qt.LeftButton) {
+            if(root.isSideBar && !plasmoid.configuration.hoverActivate) {
+                root.view.currentIndex = index
+            }
             root.action.trigger()
         }
         onPressAndHold: if (mouse.button === Qt.LeftButton) {

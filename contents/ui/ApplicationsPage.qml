@@ -23,6 +23,7 @@ BasePage {
         delegate: KickoffItemDelegate {
             width: view.availableWidth
             isCategory: model.hasChildren
+            isSideBar: true
         }
     }
     contentAreaComponent: VerticalStackView {

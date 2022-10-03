@@ -19,6 +19,7 @@ ColumnLayout {
     property int cfg_favoritesDisplay: plasmoid.configuration.favoritesDisplay
     property int cfg_applicationsDisplay: plasmoid.configuration.applicationsDisplay
     property alias cfg_alphaSort: alphaSort.checked
+    property alias cfg_hoverActivate: hoverActivate.checked
     property var cfg_systemFavorites: String(plasmoid.configuration.systemFavorites)
     property int cfg_primaryActions: plasmoid.configuration.primaryActions
     property alias cfg_gridColumns: gridColumns.value
@@ -124,6 +125,15 @@ ColumnLayout {
             valueFromText: function(text) {
                 return parseInt(text);
             }
+        }
+
+        Item {
+            Kirigami.FormData.isSection: true
+        }
+
+        CheckBox {
+            id: hoverActivate
+            text: i18n("Hover to activate or change categories")
         }
 
         Item {
