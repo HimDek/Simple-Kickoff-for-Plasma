@@ -17,3 +17,6 @@ X-KDE-PluginInfo-Version=2.5
 X-KDE-PluginInfo-Category=Application Launchers
 X-KDE-PluginInfo-License=GPL-2.0+
 X-KDE-PluginInfo-EnabledByDefault=true
+
+Name[nl]=Eenvoudige Applicatie Launcher
+Comment[nl]=Een vereenvoudigde vork van het Kickoff Application Launcher Menu
