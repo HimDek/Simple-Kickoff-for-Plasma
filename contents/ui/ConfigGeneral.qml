@@ -98,7 +98,7 @@ ColumnLayout {
         SpinBox {
             id: gridColumns
             Layout.minimumWidth: Kirigami.Units.gridUnit * 1
-            Kirigami.FormData.label: i18n("Colums in grid:")
+            Kirigami.FormData.label: i18n("Columns in grid:")
             from: 4
             to: 8
             stepSize: 1
