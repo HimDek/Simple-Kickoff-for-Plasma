@@ -13,7 +13,7 @@ X-Plasma-RequiredExtensions=LaunchApp
 
 X-KDE-PluginInfo-Author=various
 X-KDE-PluginInfo-Name=org.kde.plasma.simplekickoff
-X-KDE-PluginInfo-Version=2.4
+X-KDE-PluginInfo-Version=2.5
 X-KDE-PluginInfo-Category=Application Launchers
 X-KDE-PluginInfo-License=GPL-2.0+
 X-KDE-PluginInfo-EnabledByDefault=true
