@@ -5,8 +5,8 @@
     SPDX-FileCopyrightText: 2013 2014 David Edmundson <davidedmundson@kde.org>
     SPDX-FileCopyrightText: 2014 Sebastian Kügler <sebas@kde.org>
     SPDX-FileCopyrightText: 2021 Mikel Johnson <mikel5764@gmail.com>
-    SPDX-FileCopyrightText: 2021 by Noah Davis <noahadvs@gmail.com>
-    SPDX-FileCopyrightText: 2022 Himprakash Deka <himprakashd@gmail.com>
+    SPDX-FileCopyrightText: 2021 Noah Davis <noahadvs@gmail.com>
+    SPDX-FileCopyrightText: 2023 Himprakash Deka <himprakashd@gmail.com>
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -14,15 +14,29 @@ import QtQuick 2.15
 import QtQuick.Templates 2.15 as T
 import QtQuick.Layouts 1.15
 import QtQml 2.15
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.private.kicker 0.1 as Kicker
-import org.kde.plasma.components 3.0 as PC3
+import org.kde.plasma.plasmoid 2.0
+import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 EmptyPage {
     id: root
 
+    // kickoff is Kickoff.qml
+    leftPadding: -kickoff.backgroundMetrics.leftPadding
+    rightPadding: -kickoff.backgroundMetrics.rightPadding
+    topPadding: 0
+    bottomPadding: -kickoff.backgroundMetrics.bottomPadding
+    readonly property var appletInterface: kickoff
+
     Layout.minimumWidth: implicitWidth
+    Layout.maximumWidth: Kirigami.Units.gridUnit * 80
     Layout.minimumHeight: implicitHeight
+    Layout.maximumHeight: Kirigami.Units.gridUnit * 40
+    Layout.preferredWidth: Math.max(implicitWidth, width)
+    Layout.preferredHeight: Math.max(implicitHeight, height)
+
+    property alias applicationsPage: applicationsPage
+    property bool blockingHoverFocus: false
 
     /* NOTE: Important things to know about keyboard input handling:
      *
@@ -46,13 +60,18 @@ EmptyPage {
      * - KeyNavigation uses BacktabFocusReason (TabFocusReason if mirrored) for left,
      * TabFocusReason (BacktabFocusReason if mirrored) for right,
      * BacktabFocusReason for up and TabFocusReason for down.
+     *
+     * - KeyNavigation does not seem to respect dynamic changes to focus chain
+     * rules in the reverse direction, which can lead to confusing results.
+     * It is therefore safer to use Keys for items whose position in the Tab
+     * order must be changed on demand. (Tested with Qt 5.15.8 on X11.)
      */
 
     header: Header {
         id: header
-        preferredStackViewWidth: applicationsPage.stackViewWidth
+        preferredSearchBarWidth: applicationsPage.stackViewWidth - kickoff.backgroundMetrics.leftPadding
         Binding {
-            target: plasmoid.rootItem
+            target: kickoff
             property: "header"
             value: header
             restoreMode: Binding.RestoreBinding
@@ -66,7 +85,7 @@ EmptyPage {
         // Not using a component to prevent it from being destroyed
         initialItem: ApplicationsPage {
             id: applicationsPage
-            preferredLeaveButtonsWidth: header.leaveButtons.width
+            preferredSideBarWidth: header.leaveButtons.width
             objectName: "applicationsPage"
         }
 
@@ -80,17 +99,79 @@ EmptyPage {
                 implicitHeight: applicationsPage.implicitHeight
                 // Forces the function be re-run every time runnerModel.count changes.
                 // This is absolutely necessary to make the search view work reliably.
-                model: plasmoid.rootItem.runnerModel.count ? plasmoid.rootItem.runnerModel.modelForRow(0) : null
-                delegate: KickoffItemDelegate {
+                model: kickoff.runnerModel.count ? kickoff.runnerModel.modelForRow(0) : null
+                delegate: KickoffListDelegate {
                     width: view.availableWidth
                     isSearchResult: true
                 }
                 activeFocusOnTab: true
-                // always focus the first item in the header focus chain
-                KeyNavigation.tab: root.header.nextItemInFocusChain()
+                property var interceptedPosition: null
+                Keys.onTabPressed: event => {
+                    kickoff.firstHeaderItem.forceActiveFocus(Qt.TabFocusReason);
+                }
+                Keys.onBacktabPressed: event => {
+                    kickoff.lastHeaderItem.forceActiveFocus(Qt.BacktabFocusReason);
+                }
                 T.StackView.onActivated: {
-                    plasmoid.rootItem.sideBar = null
-                    plasmoid.rootItem.contentArea = searchView
+                    kickoff.sideBar = null
+                    kickoff.contentArea = searchView
+                }
+
+                Connections {
+                    target: blockHoverFocusHandler
+                    enabled: blockHoverFocusHandler.enabled && !searchView.interceptedPosition
+                    function onPointChanged() {
+                        searchView.interceptedPosition = blockHoverFocusHandler.point.position
+                    }
+                }
+
+                Connections {
+                    target: blockHoverFocusHandler
+                    enabled: blockHoverFocusHandler.enabled && searchView.interceptedPosition && root.blockingHoverFocus
+                    function onPointChanged() {
+                        if (blockHoverFocusHandler.point.position === searchView.interceptedPosition) {
+                            return;
+                        }
+                        root.blockingHoverFocus = false
+                    }
+                }
+
+                HoverHandler {
+                    id: blockHoverFocusHandler
+                    enabled: !contentItemStackView.busy && (!searchView.interceptedPosition || root.blockingHoverFocus)
+                }
+
+                Loader {
+                    anchors.centerIn: searchView.view
+                    width: searchView.view.width - (Kirigami.Units.gridUnit * 4)
+
+                    active: searchView.view.count === 0
+                    visible: active
+                    asynchronous: true
+
+                    sourceComponent: PlasmaExtras.PlaceholderMessage {
+                        id: emptyHint
+
+                        iconName: "edit-none"
+                        opacity: 0
+                        text: i18nc("@info:status", "No matches")
+
+                        Connections {
+                            target: kickoff.runnerModel
+                            function onQueryFinished() {
+                                showAnimation.restart()
+                            }
+                        }
+
+                        NumberAnimation {
+                            id: showAnimation
+                            duration: Kirigami.Units.longDuration
+                            easing.type: Easing.OutCubic
+                            property: "opacity"
+                            target: emptyHint
+                            to: 1
+                        }
+                    }
                 }
             }
         }
@@ -98,19 +179,30 @@ EmptyPage {
         Keys.priority: Keys.AfterItem
         // This is here rather than root because events are implicitly forwarded
         // to parent items. Don't want to send multiple events to searchField.
-        Keys.forwardTo: plasmoid.rootItem.searchField
+        Keys.forwardTo: kickoff.searchField
 
         Connections {
             target: root.header
             function onSearchTextChanged() {
-                if (root.header.searchText.length === 0 && contentItemStackView.currentItem.objectName != "applicationsPage") {
+                if (root.header.searchText.length === 0 && contentItemStackView.currentItem.objectName !== "applicationsPage") {
+                    root.blockingHoverFocus = false
                     contentItemStackView.reverseTransitions = true
                     contentItemStackView.replace(applicationsPage)
-                } else if (root.header.searchText.length > 0 && contentItemStackView.currentItem.objectName != "searchView") {
-                    contentItemStackView.reverseTransitions = false
-                    contentItemStackView.replace(searchViewComponent)
+                } else if (root.header.searchText.length > 0) {
+                    if (contentItemStackView.currentItem.objectName !== "searchView") {
+                        contentItemStackView.reverseTransitions = false
+                        contentItemStackView.replace(searchViewComponent)
+                    } else {
+                        root.blockingHoverFocus = true
+                        contentItemStackView.contentItem.interceptedPosition = null
+                        contentItemStackView.contentItem.currentIndex = 0
+                    }
                 }
             }
         }
+    }
+
+    Component.onCompleted: {
+        rootModel.refresh();
     }
 }

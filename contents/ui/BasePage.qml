@@ -1,32 +1,19 @@
 /*
-    Copyright (C) 2011  Martin Gräßlin <mgraesslin@kde.org>
-    Copyright (C) 2012 Marco Martin <mart@kde.org>
-    Copyright (C) 2015-2018  Eike Hein <hein@kde.org>
-    Copyright (C) 2021 by Mikel Johnson <mikel5764@gmail.com>
-    Copyright (C) 2021 by Noah Davis <noahadvs@gmail.com>
-    Copyright (C) 2022 Himprakash Deka <himprakashd@gmail.com>
+    SPDX-FileCopyrightText: 2011 Martin Gräßlin <mgraesslin@kde.org>
+    SPDX-FileCopyrightText: 2012 Marco Martin <mart@kde.org>
+    SPDX-FileCopyrightText: 2015-2018 Eike Hein <hein@kde.org>
+    SPDX-FileCopyrightText: 2021 Mikel Johnson <mikel5764@gmail.com>
+    SPDX-FileCopyrightText: 2021 Noah Davis <noahadvs@gmail.com>
+    SPDX-FileCopyrightText: 2023 Himprakash Deka <himprakashd@gmail.com>
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+    SPDX-License-Identifier: GPL-2.0-or-later
 */
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Templates 2.15 as T
 import QtQml 2.15
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 3.0 as PC3
-import org.kde.plasma.private.kicker 0.1 as Kicker
+import org.kde.ksvg 1.0 as KSvg
+import org.kde.plasma.workspace.trianglemousefilter 1.0
 
 FocusScope {
     id: root
@@ -42,28 +29,50 @@ FocusScope {
     property alias implicitSideBarHeight: sideBarLoader.implicitHeight
 
     implicitWidth: root.preferredSideBarWidth + contentAreaLoader.implicitWidth
-    implicitHeight: Math.max(root.preferredSideBarHeight, KickoffSingleton.gridCellSize * plasmoid.configuration.gridRows)
+    implicitHeight: Math.max(root.preferredSideBarHeight, contentAreaLoader.implicitHeight)
 
-    Kicker.TriangleMouseFilter {
+    TriangleMouseFilter {
         id: sideBarFilter
         anchors {
             left: parent.left
             top: parent.top
             bottom: parent.bottom
         }
+        LayoutMirroring.enabled: kickoff.sideBarOnRight
         implicitWidth: root.preferredSideBarWidth
         implicitHeight: root.preferredSideBarHeight
-        edge: LayoutMirroring.enabled ? Qt.LeftEdge : Qt.RightEdge
+        edge: kickoff.sideBarOnRight ? Qt.LeftEdge : Qt.RightEdge
+        blockFirstEnter: true
         Loader {
             id: sideBarLoader
-            anchors {
-                left: parent.left
-                top: parent.top
+            anchors.fill: parent
+            // When positioned after the content area, Tab should go to the start of the header focus chain
+            Keys.onTabPressed: event => {
+                (kickoff.paneSwap ? kickoff.header.nextItemInFocusChain() : contentAreaLoader)
+                    .forceActiveFocus(Qt.TabFocusReason);
             }
-            // backtab is implicitly set by the last button in Header.qml
-            KeyNavigation.tab: root.contentAreaItem
-            KeyNavigation.right: contentAreaLoader
-            Keys.onUpPressed: plasmoid.rootItem.header.nextItemInFocusChain().forceActiveFocus(Qt.BacktabFocusReason)
+            Keys.onBacktabPressed: event => {
+                (kickoff.paneSwap ? contentAreaLoader : kickoff.header.pinButton)
+                    .forceActiveFocus(Qt.BacktabFocusReason);
+            }
+            Keys.onLeftPressed: event => {
+                if (kickoff.sideBarOnRight) {
+                    contentAreaLoader.forceActiveFocus();
+                }
+            }
+            Keys.onRightPressed: event => {
+                if (!kickoff.sideBarOnRight) {
+                    contentAreaLoader.forceActiveFocus();
+                }
+            }
+            Keys.onUpPressed: event => {
+                kickoff.header.nextItemInFocusChain()
+                    .forceActiveFocus(Qt.BacktabFocusReason);
+            }
+            Keys.onDownPressed: event => {
+                kickoff.header.leaveButtons.nextItemInFocusChain()
+                    .forceActiveFocus(Qt.TabFocusReason);
+            }
         }
     }
     Loader {
@@ -71,11 +80,36 @@ FocusScope {
         focus: true
         anchors {
             left: sideBarFilter.right
+            right: parent.right
             top: parent.top
+            bottom: parent.bottom
         }
-        KeyNavigation.backtab: root.sideBarItem
-        Keys.onTabPressed: plasmoid.rootItem.header.leaveButtons.nextItemInFocusChain().forceActiveFocus(Qt.BacktabFocusReason)
-        KeyNavigation.left: sideBarLoader
-        Keys.onUpPressed: plasmoid.rootItem.searchField.forceActiveFocus(Qt.BacktabFocusReason)
+        LayoutMirroring.enabled: kickoff.sideBarOnRight
+        // When positioned after the sidebar, Tab should go to the start of the header focus chain
+        Keys.onTabPressed: event => {
+            (kickoff.paneSwap ? sideBarLoader : kickoff.header.nextItemInFocusChain())
+                .forceActiveFocus(Qt.TabFocusReason)
+        }
+        Keys.onBacktabPressed: event => {
+            (kickoff.paneSwap ? kickoff.header.avatar : sideBarLoader)
+                .forceActiveFocus(Qt.BacktabFocusReason)
+        }
+        Keys.onLeftPressed: event => {
+            if (!kickoff.sideBarOnRight) {
+                sideBarLoader.forceActiveFocus();
+            }
+        }
+        Keys.onRightPressed: event => {
+            if (kickoff.sideBarOnRight) {
+                sideBarLoader.forceActiveFocus();
+            }
+        }
+        Keys.onUpPressed: event => {
+            kickoff.searchField.forceActiveFocus(Qt.BacktabFocusReason);
+        }
+        Keys.onDownPressed: event => {
+            kickoff.header.leaveButtons.nextItemInFocusChain()
+                .forceActiveFocus(Qt.TabFocusReason)
+        }
     }
 }
