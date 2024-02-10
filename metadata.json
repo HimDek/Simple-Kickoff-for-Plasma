@@ -22,5 +22,6 @@
     ],
     "X-Plasma-RequiredExtensions": [
         "LaunchApp"
-    ]
+    ],
+    "X-Plasma-API-Minimum-Version": "6.0"
 }
