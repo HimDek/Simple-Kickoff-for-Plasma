@@ -1,4 +1,5 @@
 {
+    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -6,16 +7,16 @@
             }
         ],
         "Category": "Application Launchers",
-        "Description": "Search Applications and more",
-        "EnabledByDefault": true,
-        "Icon": "start-here-kde",
-        "Id": "org.kde.plasma.simplekickoff",
-        "License": "GPL-2.0+",
-        "Name": "Simple Application Launcher",
         "ServiceTypes": [
             "Plasma/Applet"
         ],
-        "Version": "2.5"
+        "EnabledByDefault": true,
+        "Name": "Simple Application Launcher",
+        "Description": "Search Applications and more",
+        "Id": "org.kde.plasma.simplekickoff",
+        "Icon": "start-here-kde",
+        "Version": "2.5",
+        "License": "GPL-2.0+"
     },
     "X-Plasma-Provides": [
         "org.kde.plasma.launchermenu"
